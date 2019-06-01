@@ -1,0 +1,9 @@
+# This will bootstrap an instance of linux on any empty filesystem
+
+---
+
+- name: Setup filesystem
+  hosts: localhost
+  roles:
+    - partition
+  become: true

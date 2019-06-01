@@ -1,0 +1,13 @@
+---
+
+- name: Determine available disks
+  command: cat /proc/partitions
+  register: blocks
+
+- debug:
+    msg: blocks
+
+- name: Prompt for user selection on disks
+  vars_prompt:
+    - name: disks
+      prompt: "Choose disk to install: {{ blocks }}"
