@@ -7,7 +7,23 @@
 - debug:
     msg: blocks
 
+- name: Determine base OS
+  shell: "grep -m1 NAME /etc/*release | cut -d\"=\" -f2"
+  register: base_os
+  when: base_os == ""
+
 - name: Prompt for user selection on disks
   vars_prompt:
-    - name: disks
+    - name: disk
       prompt: "Choose disk to install: {{ blocks }}"
+
+- name: Partition system
+  parted:
+    device: "{{ disk }}"
+    number: 1
+    flags: lvm
+    state: present
+
+- name: Install Arch Linux
+  include: arch.yml
+  when: base_os is match(".*Arch.*")
