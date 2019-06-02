@@ -4,6 +4,13 @@
 
 - name: Setup filesystem
   hosts: localhost
+  tasks:
+    - name: Determine available disks
+      command: cat /proc/partitions
+      register: blocks
+  vars_prompt:
+    - name: disk
+      prompt: "Choose disk to install: {{ blocks }}"
   roles:
     - partition
   become: true

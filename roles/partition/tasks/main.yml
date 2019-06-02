@@ -1,22 +1,5 @@
 ---
 
-- name: Determine available disks
-  command: cat /proc/partitions
-  register: blocks
-
-- debug:
-    msg: blocks
-
-- name: Determine base OS
-  shell: "grep -m1 NAME /etc/*release | cut -d\"=\" -f2"
-  register: base_os
-  when: base_os == ""
-
-- name: Prompt for user selection on disks
-  vars_prompt:
-    - name: disk
-      prompt: "Choose disk to install: {{ blocks }}"
-
 - name: Partition system
   parted:
     device: "{{ disk }}"
