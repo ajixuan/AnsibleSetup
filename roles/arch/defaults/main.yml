@@ -1,0 +1,10 @@
+---
+hostname: arch
+
+time:
+  hwclock: UTC
+  timezone: Canada/Eastern
+
+locale:
+  locale: 'en.GB.UTF-8'
+  console_keymap: us

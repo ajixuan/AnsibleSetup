@@ -1,0 +1,11 @@
+---
+
+hostname: aji_arch
+
+time:
+  hwclock: UTC
+  timezone: Canada/Eastern
+
+locale:
+  locale: ['en.US.UTF-8']
+  console_keymap: ['us']

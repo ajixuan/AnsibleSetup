@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Determine os type
-os_family="$(grep -m1 NAME /etc/*release | cut -d\"=\" -f2)"
+os_family="$(grep -m1 NAME /etc/*release | cut -d'=' -f2 | sed 's/\"//g')"
 
 #Make sure Ansible is installed
-if ! which ansible ; then
+if ! which ansible > /dev/null ; then
 	case $os_family in
-	"Arch*")
+	Arch*)
 		sudo pacman -Sy && yes | sudo pacman -S ansible ;;
 	*)
 	    echo "Please install ansible"
@@ -16,6 +16,8 @@ if ! which ansible ; then
 fi
 
 # Determine available disks
+
+
 
 
 #Run playbook

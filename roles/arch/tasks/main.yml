@@ -1,0 +1,16 @@
+---
+
+- name: Update pacman cache
+  pacman:
+    update_cache: True
+  ignore_errors: True
+
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+
+- name: Sync ntp
+  import_tasks: setup_ntp.yml
+
+- name: Set locale
+  import_tasks: locale.yml
