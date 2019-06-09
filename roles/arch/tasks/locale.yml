@@ -1,18 +1,21 @@
 - name: Generate locale
   locale_gen:
-    name: '{{ locale.locale }}'
+    name: '{{ item }}'
     state: present
+  loop: '{{ locale.locale }}'
 
 - name: Set locale
   lineinfile:
     path: /etc/locale.conf
     create: True
-    line: 'LANG={{ locale.locale }}'
+    line: 'LANG={{ item }}'
+  loop: '{{ locale.locale }}'
 
 - name: Set virtual console keymap
   lineinfile:
     path: /etc/vconsole.conf
     create: True
-    line: 'KEYMAP={{ locale.console_keymap }}'
+    line: 'KEYMAP={{ item }}'
     state: present
   notify: Generate initramfs
+  loop: '{{ locale.console_keymap }}'
